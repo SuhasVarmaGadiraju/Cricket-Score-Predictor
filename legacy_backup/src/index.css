@@ -1,0 +1,229 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Cricket Score Prediction Design System - All colors MUST be HSL */
+
+@layer base {
+  :root {
+    --background: 220 15% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 15% 12%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 15% 12%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Cricket green primary */
+    --primary: 112 45% 35%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Stadium blue secondary */
+    --secondary: 215 65% 50%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted pitch brown */
+    --muted: 30 15% 20%;
+    --muted-foreground: 30 5% 65%;
+
+    /* Accent purple for gradients */
+    --accent: 270 60% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 112 45% 35%;
+
+    --radius: 0.75rem;
+
+    /* Cricket-specific colors */
+    --cricket-green: 112 45% 35%;
+    --cricket-green-light: 112 45% 45%;
+    --stadium-blue: 215 65% 50%;
+    --stadium-blue-dark: 215 65% 35%;
+    --pitch-brown: 30 30% 30%;
+    --score-gold: 45 90% 55%;
+    
+    /* Gradients */
+    --gradient-cricket: linear-gradient(135deg, hsl(var(--stadium-blue)) 0%, hsl(var(--accent)) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(220 15% 12%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(220 15% 15%) 100%);
+    
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.3);
+    --shadow-card: 0 10px 40px -10px hsl(0 0% 0% / 0.5);
+    --shadow-elevated: 0 20px 60px -15px hsl(0 0% 0% / 0.6);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 220 15% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 112 45% 35%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 15% 18%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 220 15% 18%;
+    --sidebar-ring: 112 45% 35%;
+  }
+
+  .dark {
+    --background: 220 15% 8%;
+    --foreground: 0 0% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/50 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary;
+  }
+}
+
+@layer components {
+  /* Magic cursor effect */
+  .magic-cursor {
+    cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' fill='%234ade80' opacity='0.3'/%3E%3Ccircle cx='12' cy='12' r='4' fill='%234ade80'/%3E%3C/svg%3E") 12 12, auto;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-cricket);
+  }
+  
+  /* Animated gradient background */
+  .animated-gradient {
+    background: var(--gradient-cricket);
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
+  
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  /* Glow effect */
+  .glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* Card hover effect */
+  .card-hover {
+    transition: var(--transition-smooth);
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-elevated);
+  }
+}
+
+@layer utilities {
+  /* Animation keyframes */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes bounce-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--primary) / 0.8);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scale-in 0.5s ease-out;
+  }
+  
+  .animate-slide-in-right {
+    animation: slide-in-right 0.6s ease-out;
+  }
+  
+  .animate-bounce-in {
+    animation: bounce-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+}
